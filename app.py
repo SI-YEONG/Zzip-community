@@ -43,7 +43,6 @@ with open("the_galaxy.jpg", "rb") as f:
 st.markdown(
     f"""
     <style>
-    /* 기존 배경 및 전체 텍스트 설정 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -51,6 +50,7 @@ st.markdown(
         background-position: center;
         color: white !important;
     }}
+
     section[data-testid="stSidebar"] {{
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
@@ -58,28 +58,29 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 타이틀, 본문 텍스트 */
+    /* 타이틀 등 흰색 유지 */
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* 라디오 / 체크박스 라벨 */
+    /* 체크박스, 라디오 흰색 */
     .stRadio > label, .stCheckbox > label {{
         color: white !important;
     }}
 
-    /* ✅ 일반 입력창 + 시간 입력창 (input 박스 내부 글씨 검정색으로) */
-    input[type="text"], input[type="number"], input[type="time"] {{
+    /* ✅ 진짜 핵심: 시간 입력창 텍스트를 검정으로 강제 지정 */
+    input[type="time"], .stTimeInput input, .css-1y4p8pa input {{
         color: black !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
+        background-color: rgba(255, 255, 255, 0.15) !important;
     }}
 
-    /* 시간 입력창의 프레임 내부까지 덮어주는 경우 */
-    .stTimeInput input {{
-        color: black !important;
+    /* 입력창 focus 상태에서 outline 없애기 (선택) */
+    input:focus {{
+        outline: none !important;
+        box-shadow: 0 0 5px rgba(255,255,255,0.6);
     }}
 
-    /* 버튼 */
+    /* 버튼 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
