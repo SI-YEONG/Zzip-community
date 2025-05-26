@@ -39,10 +39,10 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
-
 st.markdown(
     f"""
     <style>
+    /* 전체 앱 배경 이미지 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -51,6 +51,7 @@ st.markdown(
         color: white !important;
     }}
 
+    /* 사이드바 배경 이미지 */
     section[data-testid="stSidebar"] {{
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
@@ -58,34 +59,36 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 타이틀 등 흰색 유지 */
+    /* 기본 텍스트 흰색으로 */
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* 체크박스, 라디오 흰색 */
+    /* 라디오 및 체크박스 라벨 */
     .stRadio > label, .stCheckbox > label {{
         color: white !important;
     }}
 
-    /* ✅ 진짜 핵심: 시간 입력창 텍스트를 검정으로 강제 지정 */
-    /* 시간 선택 입력칸 글자색을 검정으로 설정 */
-    .stTimeInput input {
+    /* 일반 입력창 + 셀렉트 + 텍스트 영역 */
+    input, textarea, select {{
+        background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
-    }
-
-    /* 입력창 focus 상태에서 outline 없애기 (선택) */
-    input:focus {{
-        outline: none !important;
-        box-shadow: 0 0 5px rgba(255,255,255,0.6);
     }}
 
-    /* 버튼 스타일 */
+    /* ✅ 시간 선택창 텍스트를 확실히 검정색으로 */
+    .stTimeInput input, input[type="time"] {{
+        color: black !important;
+        background-color: rgba(255, 255, 255, 0.8) !important;
+    }}
+
+    /* 버튼 기본 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
         border: 1px solid white !important;
     }}
+
+    /* 버튼 호버 스타일 */
     .stButton > button:hover {{
         color: #ffffdd !important;
         border-color: #ffffdd !important;
@@ -95,6 +98,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # 감성 문구
 st.markdown(
