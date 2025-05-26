@@ -69,18 +69,10 @@ st.markdown(
     }}
 
     /* ✅ 진짜 핵심: 시간 입력창 텍스트를 검정으로 강제 지정 */
-    /* 잠드는 시간/기상시간 입력창만 검정 배경 + 흰 텍스트 */
-    input[type="time"], .stTimeInput input {{
-        background-color: black !important;
-        color: white !important;
-        border: 1px solid white !important;
-    }}
-
-    /* 선택창(화살표 박스)도 검정 배경 + 흰 텍스트 */
-    select {{
-        background-color: black !important;
-        color: white !important;
-    }}
+    /* 시간 선택 입력칸 글자색을 검정으로 설정 */
+    .stTimeInput input {
+        color: black !important;
+    }
 
     /* 입력창 focus 상태에서 outline 없애기 (선택) */
     input:focus {{
