@@ -39,6 +39,7 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
+
 st.markdown(
     f"""
     <style>
@@ -54,34 +55,24 @@ st.markdown(
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
         background-position: center;
-        color: white !important;
     }}
 
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    div[data-baseweb="timepicker"] * {{
-        color: black !important;
-    }}
-
-    div[data-baseweb="timepicker"] input {{
-        color: black !important;
-        background-color: rgba(255,255,255,0.9) !important;
-        font-weight: 600 !important;
-    }}
-
-    /* ✅ 드롭다운 리스트 항목 텍스트 */
-    /* 드롭다운 펼쳤을 때 시간 항목들 텍스트 색상 설정 */
-    div[role="listbox"] > div > div > span {{
+    /* ✅ 입력창/드롭다운 항목 모두 검정 */
+    input[type="text"], input[type="time"], textarea {{
         color: black !important;
         background-color: white !important;
-        font-weight: 600;
     }}
-
-    input, textarea, select {{
-        background-color: rgba(255, 255, 255, 0.1) !important;
+    div[role="listbox"] span, div[role="listbox"] div {{
         color: black !important;
+        background-color: white !important;
+    }}
+    ::placeholder {{
+        color: black !important;
+        opacity: 1 !important;
     }}
 
     .stButton > button {{
@@ -98,6 +89,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # 감성 문구
 st.markdown(
