@@ -39,10 +39,11 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
-    
+
 st.markdown(
     f"""
     <style>
+    /* 기존 배경 및 전체 텍스트 설정 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -57,22 +58,28 @@ st.markdown(
         color: white !important;
     }}
 
-    label, h1, h2, h3, h4, h5, h6, p, span, div, .css-16idsys, .css-qrbaxs {{
+    /* 타이틀, 본문 텍스트 */
+    label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
+
+    /* 라디오 / 체크박스 라벨 */
     .stRadio > label, .stCheckbox > label {{
         color: white !important;
     }}
 
-    /* ✅ 입력 필드 및 placeholder 텍스트도 검정으로 */
-    input, textarea, select, .stTimeInput input {{
-        background-color: rgba(255, 255, 255, 0.1) !important;
+    /* ✅ 일반 입력창 + 시간 입력창 (input 박스 내부 글씨 검정색으로) */
+    input[type="text"], input[type="number"], input[type="time"] {{
         color: black !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
     }}
-    .stTimeInput input::placeholder {{
+
+    /* 시간 입력창의 프레임 내부까지 덮어주는 경우 */
+    .stTimeInput input {{
         color: black !important;
     }}
 
+    /* 버튼 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
