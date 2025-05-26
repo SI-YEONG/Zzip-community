@@ -77,7 +77,6 @@ st.markdown(
 
     /* ✅ 시간 입력창 텍스트 검정색 */
     .stTimeInput input {{
-        background-color: white !important;
         color: black !important;
         font-weight: 600;
     }}
