@@ -60,7 +60,7 @@ st.markdown(
     }}
 
     /* 라벨 및 헤더 텍스트 흰색 */
-    label, h1, h2, h3, h4, h5, h6, p, span, div, .css-16idsys, .css-qrbaxs {{
+    label, h1, h2, h3, h4, h5, h6, p, div, .css-16idsys, .css-qrbaxs {{
         color: white !important;
     }}
 
