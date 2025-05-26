@@ -39,7 +39,6 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
-
 st.markdown(
     f"""
     <style>
@@ -60,30 +59,30 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 전체 텍스트 흰색 */
+    /* 기본 텍스트는 white지만, 시간 입력창 라벨/텍스트만 예외처리함 */
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* 라디오, 체크박스 라벨 흰색 */
-    .stRadio > label, .stCheckbox > label {{
-        color: white !important;
+    /* ✅ time_input 블록 내 텍스트를 검정으로 강제 덮어쓰기 */
+    div[data-baseweb="timepicker"] * {{
+        color: black !important;
     }}
 
-    /* 일반 입력창 */
+    /* ✅ time_input의 입력 필드도 검정 + 밝은 배경 */
+    div[data-baseweb="timepicker"] input {{
+        color: black !important;
+        background-color: rgba(255,255,255,0.9) !important;
+        font-weight: 600 !important;
+    }}
+
+    /* 일반 입력창 스타일 유지 */
     input, textarea, select {{
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
     }}
 
-    /* ✅ 시간 선택창 input 강제 override */
-    div[data-baseweb="timepicker"] input {{
-        color: black !important;
-        background-color: rgba(255,255,255,0.8) !important;
-        font-weight: bold !important;
-    }}
-
-    /* 버튼 */
+    /* 버튼 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
@@ -98,6 +97,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 
 # 감성 문구
 st.markdown(
