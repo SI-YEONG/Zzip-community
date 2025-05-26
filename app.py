@@ -42,7 +42,6 @@ with open("the_galaxy.jpg", "rb") as f:
 st.markdown(
     f"""
     <style>
-    /* 전체 배경 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -51,7 +50,6 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 사이드바 배경 */
     section[data-testid="stSidebar"] {{
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
@@ -59,30 +57,32 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 기본 텍스트는 white지만, 시간 입력창 라벨/텍스트만 예외처리함 */
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* ✅ time_input 블록 내 텍스트를 검정으로 강제 덮어쓰기 */
     div[data-baseweb="timepicker"] * {{
         color: black !important;
     }}
 
-    /* ✅ time_input의 입력 필드도 검정 + 밝은 배경 */
     div[data-baseweb="timepicker"] input {{
         color: black !important;
         background-color: rgba(255,255,255,0.9) !important;
         font-weight: 600 !important;
     }}
 
-    /* 일반 입력창 스타일 유지 */
+    /* ✅ 드롭다운 리스트 항목 텍스트 */
+    div[role="listbox"] span {{
+        color: black !important;
+        background-color: white !important;
+        font-weight: 600;
+    }}
+
     input, textarea, select {{
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
     }}
 
-    /* 버튼 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
@@ -97,7 +97,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # 감성 문구
 st.markdown(
