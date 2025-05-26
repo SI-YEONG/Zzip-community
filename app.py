@@ -67,8 +67,8 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 입력 텍스트창 배경과 글씨 */
-    input, textarea, select {{
+    /* ✅ 입력 텍스트창 + 시간 선택 입력창도 검정 글씨로 */
+    input, textarea, select, .stTimeInput input {{
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
     }}
