@@ -33,11 +33,11 @@ community_df = pd.read_csv(comm_path, encoding="cp949")
 comment_df = pd.read_csv(comment_path, encoding="cp949")
 
 # 🌌 배경 설정
-with open("밤하늘.jpg", "rb") as img_file:
+with open("night_sky.jpg", "rb") as img_file:
     img_base64 = base64.b64encode(img_file.read()).decode()
 
 # 사이드바 배경 이미지 불러오기
-with open("은하수.jpg", "rb") as f:
+with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
     
 st.markdown(
