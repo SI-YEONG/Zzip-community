@@ -73,11 +73,11 @@ st.markdown(
 
     /* ✅ 드롭다운 리스트 항목 텍스트 */
     /* 드롭다운 펼쳤을 때 시간 항목들 텍스트 색상 설정 */
-    div[role="listbox"] > div > div > span {
+    div[role="listbox"] > div > div > span {{
         color: black !important;
         background-color: white !important;
         font-weight: 600;
-    }
+    }}
 
     input, textarea, select {{
         background-color: rgba(255, 255, 255, 0.1) !important;
