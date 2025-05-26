@@ -77,8 +77,8 @@ st.markdown(
 
     /* ✅ 시간 입력창 텍스트 검정색 */
     .stTimeInput input {{
+        background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
-        font-weight: 600;
     }}
 
     /* ✅ 드롭다운 항목도 검정 텍스트 */
