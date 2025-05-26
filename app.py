@@ -39,10 +39,11 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
+
 st.markdown(
     f"""
     <style>
-    /* 전체 앱 배경 이미지 */
+    /* 전체 배경 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -51,7 +52,7 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 사이드바 배경 이미지 */
+    /* 사이드바 배경 */
     section[data-testid="stSidebar"] {{
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
@@ -59,36 +60,35 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 기본 텍스트 흰색으로 */
+    /* 전체 텍스트 흰색 */
     label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* 라디오 및 체크박스 라벨 */
+    /* 라디오, 체크박스 라벨 흰색 */
     .stRadio > label, .stCheckbox > label {{
         color: white !important;
     }}
 
-    /* 일반 입력창 + 셀렉트 + 텍스트 영역 */
+    /* 일반 입력창 */
     input, textarea, select {{
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
     }}
 
-    /* ✅ 시간 선택창 텍스트를 확실히 검정색으로 */
-    .stTimeInput input, input[type="time"] {{
+    /* ✅ 시간 선택창 input 강제 override */
+    div[data-baseweb="timepicker"] input {{
         color: black !important;
-        background-color: rgba(255, 255, 255, 0.8) !important;
+        background-color: rgba(255,255,255,0.8) !important;
+        font-weight: bold !important;
     }}
 
-    /* 버튼 기본 스타일 */
+    /* 버튼 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
         border: 1px solid white !important;
     }}
-
-    /* 버튼 호버 스타일 */
     .stButton > button:hover {{
         color: #ffffdd !important;
         border-color: #ffffdd !important;
@@ -98,7 +98,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # 감성 문구
 st.markdown(
