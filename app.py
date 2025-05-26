@@ -57,23 +57,22 @@ st.markdown(
         color: white !important;
     }}
 
-    /* 라벨 및 기본 텍스트 흰색으로 */
     label, h1, h2, h3, h4, h5, h6, p, span, div, .css-16idsys, .css-qrbaxs {{
         color: white !important;
     }}
-
-    /* 라디오 및 체크박스 라벨 흰색 */
     .stRadio > label, .stCheckbox > label {{
         color: white !important;
     }}
 
-    /* ✅ 입력 텍스트창 + 시간 선택 입력창도 검정 글씨로 */
+    /* ✅ 입력 필드 및 placeholder 텍스트도 검정으로 */
     input, textarea, select, .stTimeInput input {{
         background-color: rgba(255, 255, 255, 0.1) !important;
         color: black !important;
     }}
+    .stTimeInput input::placeholder {{
+        color: black !important;
+    }}
 
-    /* 버튼 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
