@@ -39,10 +39,10 @@ with open("night_sky.jpg", "rb") as img_file:
 # 사이드바 배경 이미지 불러오기
 with open("the_galaxy.jpg", "rb") as f:
     sidebar_base64 = base64.b64encode(f.read()).decode()
-
 st.markdown(
     f"""
     <style>
+    /* 전체 앱 배경 */
     .stApp {{
         background-image: url("data:image/jpeg;base64,{img_base64}");
         background-size: cover;
@@ -51,30 +51,44 @@ st.markdown(
         color: white !important;
     }}
 
+    /* 사이드바 배경 */
     section[data-testid="stSidebar"] {{
         background-image: url("data:image/jpeg;base64,{sidebar_base64}");
         background-size: cover;
         background-position: center;
-    }}
-
-    label, h1, h2, h3, h4, h5, h6, p, span, div {{
         color: white !important;
     }}
 
-    /* ✅ 입력창/드롭다운 항목 모두 검정 */
-    input[type="text"], input[type="time"], textarea {{
-        color: black !important;
-        background-color: white !important;
-    }}
-    div[role="listbox"] span, div[role="listbox"] div {{
-        color: black !important;
-        background-color: white !important;
-    }}
-    ::placeholder {{
-        color: black !important;
-        opacity: 1 !important;
+    /* 라벨 및 헤더 텍스트 흰색 */
+    label, h1, h2, h3, h4, h5, h6, p, span, div, .css-16idsys, .css-qrbaxs {{
+        color: white !important;
     }}
 
+    /* 체크박스 및 라디오 텍스트 흰색 */
+    .stRadio > label, .stCheckbox > label {{
+        color: white !important;
+    }}
+
+    /* 입력창(닉네임 등) 내부 텍스트 검정색 */
+    input, textarea {{
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: black !important;
+    }}
+
+    /* ✅ 시간 입력창 텍스트 검정색 */
+    .stTimeInput input {{
+        background-color: white !important;
+        color: black !important;
+        font-weight: 600;
+    }}
+
+    /* ✅ 드롭다운 항목도 검정 텍스트 */
+    div[role="listbox"] span {{
+        color: black !important;
+        font-weight: 600;
+    }}
+
+    /* 버튼 스타일 */
     .stButton > button {{
         color: white !important;
         background-color: rgba(255, 255, 255, 0.1) !important;
