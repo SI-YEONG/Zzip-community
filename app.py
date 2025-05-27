@@ -8,8 +8,7 @@ import base64
 
 import matplotlib.font_manager as fm
 import matplotlib
-
-font_path = "fonts/malgun.ttf"  # 업로드한 경로
+font_path = "malgun.ttf"  # ← 루트에 있으니 이렇게!
 fontprop = fm.FontProperties(fname=font_path)
 matplotlib.rc('font', family=fontprop.get_name())
 matplotlib.rcParams['axes.unicode_minus'] = False
