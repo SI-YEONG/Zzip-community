@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
+import matplotlib
 import base64
 
 # 폰트 설정 추가
