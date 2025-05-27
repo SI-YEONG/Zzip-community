@@ -11,23 +11,6 @@ import matplotlib
 font_path = "malgun.ttf"
 fontprop = fm.FontProperties(fname=font_path)
 matplotlib.rcParams['axes.unicode_minus'] = False
-fig, ax = plt.subplots()
-my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax, color=["green", "red"])
-for label in ax.get_xticklabels():
-    label.set_fontproperties(fontprop)
-for label in ax.get_yticklabels():
-    label.set_fontproperties(fontprop)
-st.pyplot(fig)
-fig2, ax2 = plt.subplots()
-my_logs["기분"].value_counts().plot(
-    kind="pie",
-    autopct="%1.1f%%",
-    ax=ax2,
-    textprops={"fontproperties": fontprop}
-)
-ax2.axis("equal")
-st.pyplot(fig2)
-
 
 # 설정
 st.set_page_config(page_title="Zzip - 잠드는 습관", layout="wide")
@@ -229,13 +212,22 @@ if page == "🏠 챌린지 인증":
 
         if not my_logs.empty:
             st.write("### ✅ 성공/실패")
-            fig1, ax1 = plt.subplots()
-            my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax1, color=["green", "red"])
+            fig, ax1 = plt.subplots()
+            my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax, color=["green", "red"])
+            for label in ax.get_xticklabels():
+                label.set_fontproperties(fontprop)
+                for label in ax.get_yticklabels():
+                    label.set_fontproperties(fontprop)
             st.pyplot(fig1)
 
             st.write("### 😊 기분 통계")
             fig2, ax2 = plt.subplots()
-            my_logs["기분"].value_counts().plot(kind="pie", ax=ax2, autopct="%1.1f%%")
+            my_logs["기분"].value_counts().plot(
+                kind="pie",
+                autopct="%1.1f%%",
+                ax=ax2,
+                textprops={"fontproperties": fontprop}
+            )
             ax2.axis("equal")
             st.pyplot(fig2)
         else:
