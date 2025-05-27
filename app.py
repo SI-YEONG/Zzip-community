@@ -5,9 +5,13 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib
 import base64
+import matplotlib.font_manager as fm
 
-# 폰트 설정 추가
-matplotlib.rc('font', family='NanumGothic')
+font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'  # 예시 경로
+
+# 폰트 등록
+font_name = fm.FontProperties(fname=font_path).get_name()
+matplotlib.rc('font', family=font_name)
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # 설정
