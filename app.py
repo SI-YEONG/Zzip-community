@@ -214,7 +214,6 @@ if page == "🏠 챌린지 인증":
             st.write("### ✅ 성공/실패")
             fig1, ax1 = plt.subplots()
             my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax1, color=["green", "red"])
-            data.index = data.index.map(lambda x: "성공" if x else "실패")
             for label in ax1.get_xticklabels():
                 label.set_fontproperties(fontprop)
                 for label in ax1.get_yticklabels():
