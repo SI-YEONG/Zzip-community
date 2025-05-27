@@ -7,6 +7,7 @@ import base64
 
 # 폰트 설정 추가
 matplotlib.rc('font', family='Malgun Gothic')
+plt.rcParams['axes.unicode_minus'] = False
 
 # 설정
 st.set_page_config(page_title="Zzip - 잠드는 습관", layout="wide")
