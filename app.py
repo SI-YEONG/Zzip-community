@@ -8,10 +8,26 @@ import base64
 
 import matplotlib.font_manager as fm
 import matplotlib
-font_path = "malgun.ttf"  # ← 루트에 있으니 이렇게!
+font_path = "malgun.ttf"
 fontprop = fm.FontProperties(fname=font_path)
-matplotlib.rc('font', family=fontprop.get_name())
 matplotlib.rcParams['axes.unicode_minus'] = False
+fig, ax = plt.subplots()
+my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax, color=["green", "red"])
+for label in ax.get_xticklabels():
+    label.set_fontproperties(fontprop)
+for label in ax.get_yticklabels():
+    label.set_fontproperties(fontprop)
+st.pyplot(fig)
+fig2, ax2 = plt.subplots()
+my_logs["기분"].value_counts().plot(
+    kind="pie",
+    autopct="%1.1f%%",
+    ax=ax2,
+    textprops={"fontproperties": fontprop}
+)
+ax2.axis("equal")
+st.pyplot(fig2)
+
 
 # 설정
 st.set_page_config(page_title="Zzip - 잠드는 습관", layout="wide")
