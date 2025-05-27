@@ -5,6 +5,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import base64
 
+import matplotlib
 # 폰트 설정 추가
 matplotlib.rc('font', family='Malgun Gothic')
 matplotlib.rcParams['axes.unicode_minus'] = False
