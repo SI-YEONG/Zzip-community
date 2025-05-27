@@ -216,8 +216,8 @@ if page == "🏠 챌린지 인증":
             my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax1, color=["green", "red"])
             for label in ax1.get_xticklabels():
                 label.set_fontproperties(fontprop)
-                for label in ax1.get_yticklabels():
-                    label.set_fontproperties(fontprop)
+            for label in ax1.get_yticklabels():
+                label.set_fontproperties(fontprop)
             st.pyplot(fig1)
 
             st.write("### 😊 기분 통계")
