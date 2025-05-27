@@ -184,8 +184,13 @@ if page == "🏠 챌린지 인증":
         mood = st.radio("오늘의 기분은 어땠나요?", ["기분 좋아요", "그냥 그래요", "피곤해요"], key="mood_radio")
 
         if st.button("💾 오늘 루틴 인증 저장", key="save_today"):
-    log_df = pd.read_csv("log.csv", encoding="cp949")  # ✅ 들여쓰기 추가됨
+    log_df = pd.read_csv("log.csv", encoding="cp949")
+    
+    # 날짜 포맷 정리
+    log_df["날짜"] = pd.to_datetime(log_df["날짜"]).dt.strftime("%Y-%m-%d")
     today = datetime.now().strftime("%Y-%m-%d")
+
+    # 중복 인증 방지
     already_logged = log_df[
         (log_df["user_id"] == user_id) & (log_df["날짜"] == today)
     ]
@@ -209,6 +214,7 @@ if page == "🏠 챌린지 인증":
         log_df = pd.concat([log_df, new_log], ignore_index=True)
         log_df.to_csv("log.csv", index=False, encoding="cp949")
         st.success(f"📝 오늘 루틴 인증이 저장되었습니다! (굿모닝 챌린지: {status})")
+
 
         # 마이페이지
         st.subheader("📌 마이페이지")
