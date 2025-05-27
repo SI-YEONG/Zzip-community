@@ -6,6 +6,14 @@ import matplotlib.pyplot as plt
 import matplotlib
 import base64
 
+import matplotlib.font_manager as fm
+import matplotlib
+
+font_path = "fonts/malgun.ttf"  # 업로드한 경로
+fontprop = fm.FontProperties(fname=font_path)
+matplotlib.rc('font', family=fontprop.get_name())
+matplotlib.rcParams['axes.unicode_minus'] = False
+
 # 설정
 st.set_page_config(page_title="Zzip - 잠드는 습관", layout="wide")
 
