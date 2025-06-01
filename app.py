@@ -101,8 +101,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 페이지 선택
-page = st.sidebar.radio("페이지 선택", ["🏠 챌린지 인증", "💬 커뮤니티"])
+page = st.sidebar.radio("페이지 선택", ["🏠 챌린지 인증", "💬 커뮤니티", "📊 마이페이지", "👤 사용자 목록 (관리자 전용)"])
 
 if page == "🏠 챌린지 인증":
     st.header("🏠 Zzip – 수면 루틴 챌린지")
@@ -258,15 +257,6 @@ if page == "🏠 챌린지 인증":
             st.dataframe(today_logs[["이름", "성공여부", "기분"]])
         else:
             st.info("오늘 인증한 사용자가 아직 없습니다.")
-            
-            if username == "짱아러버":
-                st.markdown("### 📂 전체 사용자 log.csv 기록 보기 (관리자용)")
-                if st.checkbox("모든 사용자 인증 기록 보기"):
-                    try:
-                        log_df = pd.read_csv("log.csv", encoding="cp949")
-                        st.dataframe(log_df)
-                    except FileNotFoundError:
-                        st.warning("log.csv 파일이 아직 없습니다.")
                         
 elif page == "💬 커뮤니티":
     st.header("💬 Zzip 커뮤니티 – 오늘의 수면 이야기")
@@ -316,4 +306,20 @@ elif page == "💬 커뮤니티":
                 comment_df = pd.concat([comment_df, new_comment], ignore_index=True)
                 comment_df.to_csv(comment_path, index=False, encoding="cp949")
                 st.success("💬 댓글이 등록되었습니다!")
+                
+# 👤 관리자 전용 사용자 목록 페이지
+if page == "👤 사용자 목록 (관리자 전용)":
+    username_check = st.text_input("관리자 닉네임 입력", key="admin_user_csv")
+    password_check = st.text_input("비밀번호 입력", type="password", key="admin_pw_csv")
+
+    if username_check == "짱아러버":
+        st.success("✅ 관리자 모드입니다.")
+        try:
+            user_df = pd.read_csv("users.csv", encoding="cp949")
+            st.subheader("📋 가입된 사용자 목록")
+            st.dataframe(user_df)
+        except FileNotFoundError:
+            st.warning("⚠️ users.csv 파일이 없습니다.")
+    else:
+        st.error("❌ 접근 권한이 없습니다.")
 
