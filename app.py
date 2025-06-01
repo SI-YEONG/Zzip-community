@@ -231,6 +231,19 @@ if page == "🏠 챌린지 인증":
         - 기상 시간: ☀️ **{u_row['기상시간']}**
         - 챌린지 시작일: 📅 **{u_row['챌린지시작일']}**
         """)
+        st.subheader("🛠 수면 루틴 수정")
+        
+        new_sleep = st.text_input("잠드는 시간 (00:00 형식)", value=u_row['수면시간'], key="edit_sleep")
+        new_wake = st.text_input("기상 시간 (00:00 형식)", value=u_row['기상시간'], key="edit_wake")
+        
+        if st.button("💾 루틴 수정 저장"):
+            if not is_valid_time_format(new_sleep) or not is_valid_time_format(new_wake):
+                st.warning("시간 형식이 잘못되었습니다 (예: 23:30).")
+            else:
+                user_df.loc[user_df["이름"] == username, "수면시간"] = new_sleep
+                user_df.loc[user_df["이름"] == username, "기상시간"] = new_wake
+                user_df.to_csv(users_path, index=False, encoding="cp949")
+                st.success("⏰ 수면 루틴이 수정되었습니다!")
 
         # 챌린지 통계
         st.subheader("📊 챌린지 통계")
