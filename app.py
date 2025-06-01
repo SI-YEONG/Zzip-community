@@ -32,6 +32,9 @@ for path, columns in [
     if not os.path.exists(path):
         pd.DataFrame(columns=columns).to_csv(path, index=False, encoding="cp949")
 
+def is_valid_time_format(t):
+    return pd.notna(t) and isinstance(t, str) and len(t) == 5 and ":" in t
+    
 # 파일 불러오기
 user_df = pd.read_csv(users_path, encoding="cp949")
 log_df = pd.read_csv(log_path, encoding="cp949")
@@ -113,10 +116,7 @@ if page == "🏠 챌린지 인증":
     password = st.text_input("비밀번호 (4자리 숫자)", type="password", max_chars=4, key="pw")
     user_id = f"{username.strip()}_{password.strip()}"
     today = datetime.now().strftime("%Y-%m-%d")
-
-    def is_valid_time_format(t):
-        return pd.notna(t) and isinstance(t, str) and len(t) == 5 and ":" in t
-
+    
     if mode == "가입하지 않았습니다":
         if st.button("회원가입 후 루틴 저장"):
             sleep_time = "00:00"  # 기본값
