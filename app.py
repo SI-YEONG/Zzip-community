@@ -258,7 +258,16 @@ if page == "🏠 챌린지 인증":
             st.dataframe(today_logs[["이름", "성공여부", "기분"]])
         else:
             st.info("오늘 인증한 사용자가 아직 없습니다.")
-
+            
+            if username == "짱아버러":
+                st.markdown("### 📂 전체 사용자 log.csv 기록 보기 (관리자용)")
+                if st.checkbox("모든 사용자 인증 기록 보기"):
+                    try:
+                        log_df = pd.read_csv("log.csv", encoding="cp949")
+                        st.dataframe(log_df)
+                    except FileNotFoundError:
+                        st.warning("log.csv 파일이 아직 없습니다.")
+                        
 elif page == "💬 커뮤니티":
     st.header("💬 Zzip 커뮤니티 – 오늘의 수면 이야기")
     st.write("수면에 관한 고민이나 꿀팁을 자유롭게 나눠보세요.")
