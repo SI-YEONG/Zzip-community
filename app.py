@@ -187,11 +187,11 @@ if page == "🏠 챌린지 인증":
 
         if st.button("💾 오늘 루틴 인증 저장", key="save_today"):
             import os
-            if os.path.exists("log.csv"):
-                log_df = pd.read_csv("log.csv", encoding="cp949")
+            if os.path.exists(log_path):
+                log_df = pd.read_csv(log_path, encoding="cp949")
             else:
                 log_df = pd.DataFrame(columns=["날짜", "이름", "user_id", "성공여부", "기분"])
-                log_df.to_csv("log.csv", index=False, encoding="cp949")
+                log_df.to_csv(log_path, index=False, encoding="cp949")
                 
             log_df["날짜"] = pd.to_datetime(log_df["날짜"]).dt.strftime("%Y-%m-%d")
             today = datetime.now().strftime("%Y-%m-%d")
