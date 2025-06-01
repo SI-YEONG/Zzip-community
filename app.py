@@ -233,7 +233,9 @@ if page == "🏠 챌린지 인증":
 
         # 챌린지 통계
         st.subheader("📊 챌린지 통계")
-        my_logs = log_df[(log_df["user_id"] == user_id) & (log_df["날짜"] >= start_date)]
+        log_df["날짜"] = pd.to_datetime(log_df["날짜"], errors='coerce')
+        start_date_dt = pd.to_datetime(start_date, errors='coerce')
+        my_logs = log_df[(log_df["user_id"] == user_id) & (log_df["날짜"] >= start_date_dt)]
 
         if not my_logs.empty:
             st.write("### ✅ 성공/실패")
