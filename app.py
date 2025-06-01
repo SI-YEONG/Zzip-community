@@ -15,6 +15,9 @@ matplotlib.rcParams['axes.unicode_minus'] = False
 # 설정
 st.set_page_config(page_title="Zzip - 잠드는 습관", layout="wide")
 
+def is_valid_time_format(t):
+    return pd.notna(t) and isinstance(t, str) and len(t) == 5 and ":" in t
+
 # 경로 설정
 users_path = "data/users.csv"
 log_path = "data/log.csv"
@@ -31,9 +34,6 @@ for path, columns in [
 ]:
     if not os.path.exists(path):
         pd.DataFrame(columns=columns).to_csv(path, index=False, encoding="cp949")
-
-def is_valid_time_format(t):
-    return pd.notna(t) and isinstance(t, str) and len(t) == 5 and ":" in t
     
 # 파일 불러오기
 user_df = pd.read_csv(users_path, encoding="cp949")
