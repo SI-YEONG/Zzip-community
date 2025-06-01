@@ -218,19 +218,14 @@ if page == "🏠 챌린지 인증":
                 today = datetime.now().strftime("%Y-%m-%d")  # 위에서 이렇게 설정했다면
                 new_log = pd.DataFrame(
                     [[today, username, user_id, status, mood]],
-                    columns=log_df.columns
+                    columns=["날짜", "이름", "user_id", "성공여부", "기분"]
                 )
-                
+
                 log_df = pd.concat([log_df, new_log], ignore_index=True)
                 log_df.to_csv("log.csv", index=False, encoding="cp949")
                 st.success(f"📝 오늘 루틴 인증이 저장되었습니다! (굿모닝 챌린지: {status})")   
         # 마이페이지
         st.subheader("📌 마이페이지")
-        st.markdown(f"""
-        - 수면 시간: ⏰ **{u_row['수면시간']}**
-        - 기상 시간: ☀️ **{u_row['기상시간']}**
-        - 챌린지 시작일: 📅 **{u_row['챌린지시작일']}**
-        """)
         st.subheader("🛠 수면 루틴 수정")
         
         new_sleep = st.text_input("잠드는 시간 (00:00 형식)", value=u_row['수면시간'], key="edit_sleep")
@@ -240,8 +235,8 @@ if page == "🏠 챌린지 인증":
             if not is_valid_time_format(new_sleep) or not is_valid_time_format(new_wake):
                 st.warning("시간 형식이 잘못되었습니다 (예: 23:30).")
             else:
-                user_df.loc[user_df["이름"] == username, "수면시간"] = new_sleep
-                user_df.loc[user_df["이름"] == username, "기상시간"] = new_wake
+                user_df.loc[user_df['이름'] == username, '수면시간'] = new_sleep
+                user_df.loc[user_df['이름'] == username, '기상시간'] = new_wake
                 user_df.to_csv(users_path, index=False, encoding="cp949")
                 st.success("⏰ 수면 루틴이 수정되었습니다!")
 
