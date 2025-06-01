@@ -137,12 +137,15 @@ if page == "🏠 챌린지 인증":
                 st.success("🎉 회원가입 완료! 다시 로그인 해주세요.")
 
     elif mode == "가입한 적이 있습니다":
-        login_button = st.button("로그인")
-        matched = (
-            user_df["이름"].astype(str).str.strip() == username.strip()
-        ) & (
-            user_df["비밀번호"].astype(str).str.strip() == password.strip()
-        )
+        if os.path.exists(users_path):
+            user_df = pd.read_csv(users_path, encoding="cp949")
+            
+            login_button = st.button("로그인")
+            matched = (
+                user_df["이름"].astype(str).str.strip() == username.strip()
+            ) & (
+                user_df["비밀번호"].astype(str).str.strip() == password.strip()
+            )
 
         if login_button:
             if matched.any():
