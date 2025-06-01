@@ -118,23 +118,26 @@ if page == "🏠 챌린지 인증":
         return pd.notna(t) and isinstance(t, str) and len(t) == 5 and ":" in t
 
     if mode == "가입하지 않았습니다":
-        sleep_time = st.text_input("잠드는 시간 (00:00 형식)", placeholder="예: 23:30", key="sleep_input")
-        wake_time = st.text_input("기상 시간 (00:00 형식)", placeholder="예: 07:30", key="wake_input")
+    if st.button("회원가입 후 루틴 저장"):
+        sleep_time = "00:00"  # 기본값
+        wake_time = "08:00"   # 기본값
 
-        if st.button("회원가입 후 루틴 저장"):
-            if len(password.strip()) != 4 or not password.strip().isdigit():
-                st.warning("비밀번호는 4자리 숫자여야 합니다.")
-            elif not is_valid_time_format(sleep_time) or not is_valid_time_format(wake_time):
-                st.warning("수면/기상 시간은 반드시 00:00 형식으로 입력해주세요.")
-            elif user_id in user_df.apply(lambda r: f"{r['이름'].strip()}_{str(r['비밀번호']).strip()}", axis=1).values:
-                st.error("이미 존재하는 사용자입니다.")
-            else:
-                new_user = pd.DataFrame([[username.strip(), password.strip(),
-                                          sleep_time, wake_time, today]],
-                                        columns=user_df.columns)
-                user_df = pd.concat([user_df, new_user], ignore_index=True)
-                user_df.to_csv(users_path, index=False, encoding="cp949")
-                st.success("🎉 회원가입 완료! 다시 로그인 해주세요.")
+        if len(password.strip()) != 4 or not password.strip().isdigit():
+            st.warning("비밀번호는 4자리 숫자여야 합니다.")
+        elif user_id in user_df.apply(lambda r: f"{r['이름'].strip()}_{str(r['비밀번호']).strip()}", axis=1).values:
+            st.error("이미 존재하는 사용자입니다.")
+        else:
+            new_user = pd.DataFrame([[username.strip(), password.strip(),
+                                      sleep_time, wake_time, today]],
+                                    columns=user_df.columns)
+            user_df = pd.concat([user_df, new_user], ignore_index=True)
+            user_df.to_csv(users_path, index=False, encoding="cp949")
+
+            # 자동 로그인
+            st.success("🎉 회원가입 완료! 루틴 인증 화면으로 이동합니다.")
+            st.session_state["login"] = True
+            st.session_state["user_id"] = user_id
+
 
     elif mode == "가입한 적이 있습니다":
         if os.path.exists(users_path):
