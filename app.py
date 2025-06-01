@@ -259,7 +259,7 @@ if page == "🏠 챌린지 인증":
         else:
             st.info("오늘 인증한 사용자가 아직 없습니다.")
             
-            if username == "짱아버러":
+            if username == "짱아러버":
                 st.markdown("### 📂 전체 사용자 log.csv 기록 보기 (관리자용)")
                 if st.checkbox("모든 사용자 인증 기록 보기"):
                     try:
