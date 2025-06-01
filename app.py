@@ -324,7 +324,37 @@ elif page == "💬 커뮤니티":
                 comment_df = pd.concat([comment_df, new_comment], ignore_index=True)
                 comment_df.to_csv(comment_path, index=False, encoding="cp949")
                 st.success("💬 댓글이 등록되었습니다!")
-                
+
+elif page == "📊 마이페이지":
+    st.header("📊 마이페이지 – 루틴 확인 & 수정")
+
+    if st.session_state.get("login"):
+        user_id = st.session_state["user_id"]
+        username = user_id.split("_")[0]
+        u_row = user_df[user_df["이름"].astype(str).str.strip() == username].iloc[0]
+
+        st.markdown(f"""
+        - 수면 시간: ⏰ **{u_row['수면시간']}**
+        - 기상 시간: ☀️ **{u_row['기상시간']}**
+        - 챌린지 시작일: 📅 **{u_row['챌린지시작일']}**
+        """)
+
+        st.subheader("🛠 수면 루틴 수정")
+        new_sleep = st.text_input("잠드는 시간 (00:00 형식)", value=u_row['수면시간'], key="edit_sleep_mp")
+        new_wake = st.text_input("기상 시간 (00:00 형식)", value=u_row['기상시간'], key="edit_wake_mp")
+
+        if st.button("💾 루틴 수정 저장", key="save_routine_mp"):
+            if not is_valid_time_format(new_sleep) or not is_valid_time_format(new_wake):
+                st.warning("시간 형식이 잘못되었습니다 (예: 23:30).")
+            else:
+                user_df.loc[user_df['이름'] == username, '수면시간'] = new_sleep
+                user_df.loc[user_df['이름'] == username, '기상시간'] = new_wake
+                user_df.to_csv(users_path, index=False, encoding="cp949")
+                st.success("⏰ 수면 루틴이 수정되었습니다!")
+    else:
+        st.warning("⚠️ 로그인 후 이용 가능한 페이지입니다.")
+
+
 # 👤 관리자 전용 사용자 목록 페이지
 if page == "👤 사용자 목록 (관리자 전용)":
     username_check = st.text_input("관리자 닉네임 입력", key="admin_user_csv")
