@@ -108,7 +108,7 @@ if page == "🏠 챌린지 인증":
     mode = st.radio("", ["가입하지 않았습니다", "가입한 적이 있습니다"], horizontal=True)
 
     username = st.text_input("닉네임:", key="username")
-    password = st.text_input("비밀번호 (4자리 숫자)", type="password", max_chars=4, key="pw")
+    password = st.text_input("비밀번호 (4자리 숫자) - 0000 제외", type="password", max_chars=4, key="pw")
     user_id = f"{username.strip()}_{password.strip()}"
     today = datetime.now().strftime("%Y-%m-%d")
 
