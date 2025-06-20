@@ -231,6 +231,45 @@ elif page == "💬 커뮤니티":
                 comment_df = pd.concat([comment_df, new_comment], ignore_index=True)
                 comment_df.to_csv(comment_path, index=False, encoding="cp949")
                 st.success("💬 댓글이 등록되었습니다!")
+# 📊 마이페이지 기능 구현
+elif page == "📊 마이페이지":
+    if st.session_state.get("login"):
+        user_id = st.session_state["user_id"]
+        username = user_id.split("_")[0]
+        u_row = user_df[user_df["이름"].astype(str).str.strip() == username].iloc[0]
+
+        st.subheader("📌 나의 루틴 정보")
+        st.markdown(f"""
+        - 수면 시간: ⏰ **{u_row['수면시간']}**
+        - 기상 시간: ☀️ **{u_row['기상시간']}**
+        - 챌린지 시작일: 📅 **{u_row['챌린지시작일']}**
+        """)
+
+        st.subheader("📊 챌린지 성과")
+        my_logs = log_df[(log_df["user_id"] == user_id)]
+        if not my_logs.empty:
+            fig1, ax1 = plt.subplots()
+            my_logs["성공여부"].value_counts().plot(kind="bar", ax=ax1, color=["green", "red"])
+            for label in ax1.get_xticklabels():
+                label.set_fontproperties(fontprop)
+            for label in ax1.get_yticklabels():
+                label.set_fontproperties(fontprop)
+            st.pyplot(fig1)
+
+            st.write("### 😊 기분 분포")
+            fig2, ax2 = plt.subplots()
+            my_logs["기분"].value_counts().plot(
+                kind="pie",
+                autopct="%1.1f%%",
+                ax=ax2,
+                textprops={"fontproperties": fontprop}
+            )
+            ax2.axis("equal")
+            st.pyplot(fig2)
+        else:
+            st.info("아직 루틴 인증 기록이 없습니다.")
+    else:
+        st.warning("로그인이 필요합니다.")
 
 elif page == "👤 사용자 목록 (관리자 전용)":
     st.subheader("👤 관리자 로그인")
